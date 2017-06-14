@@ -20,6 +20,16 @@ function dieFace(roll) {
     return "<img src='img/die_face_6.png'>";
   }
 };
+
+function switchTurns(roll) {
+  if (roll === 1) {
+    var turnOver = "YOUR TURN IS OVER!"
+    return turnOver;
+  } else {
+    return "";
+  }
+}
+
 // function Player(playerName) {
 //   this.playerName = playerName;
 // };
@@ -58,11 +68,16 @@ $(document).ready(function() {
     event.preventDefault();
     var roll = getRandomIntInclusive(1, 6);
     var diceRoll = dieFace(roll);
+    var changeTurns = switchTurns(roll);
+
+    console.log(changeTurns);
     // var turnTotal = ;
     // var player1 = new Player(player1name);
     // var player2 = new Player(player2name);
+    // $(".switch").empty();
     $(".dice").empty();
     $(".dice").append(diceRoll);
+    $(".dice").append("<h4>" + changeTurns + "</h4>");
     $("#rollResult").text(roll);
   });
 });

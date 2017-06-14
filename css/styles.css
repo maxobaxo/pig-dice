@@ -7,3 +7,7 @@ img {
   display: block;
   margin: auto;
 }
+
+.switch {
+  display: none;
+}
