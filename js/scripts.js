@@ -22,7 +22,7 @@ function dieFace(roll) {
 };
 
 function switchTurns(roll) {
-  var turnOver = [];  
+  var turnOver = [];
   if (roll === 1) {
     turnOver.push("YOUR TURN IS OVER!");
   } else {
@@ -35,28 +35,29 @@ function switchTurns(roll) {
 //   this.playerName = playerName;
 // };
 //
-// Player.prototype.rollOutcome() = function() {
+// Player.prototype.rollOutcome = function() {
 //   return roll;
 // };
 //
-// Player.prototype.turnTotal() = function() {
-//   if (roll !== 1 ) {
+// Player.prototype.turnTotal = function(roll) {
+//   var turnTotal = 0;
+//   while (roll !== 1) {
 //     turnTotal += roll;
 //     return turnTotal;
-//   } else {
-//     turnTotal = 0;
 //   }
 // };
-// Player.prototype.grandTotal() = function() {
+// Player.prototype.grandTotal = function() {
 // };
 
 //party logic in the back
 $(document).ready(function() {
+  var player1name;
+  var player2name;
   $("#inputFields").submit(function(event) {
     event.preventDefault();
 
-    var player1name = $("input#playerOne").val();
-    var player2name = $("input#playerTwo").val();
+    player1name = $("input#playerOne").val();
+    player2name = $("input#playerTwo").val();
 
     $("#nameInput").hide();
     $(".playerOne").text(player1name);
@@ -70,15 +71,18 @@ $(document).ready(function() {
     var roll = getRandomIntInclusive(1, 6);
     var diceRoll = dieFace(roll);
     var changeTurns = switchTurns(roll);
-    // var turnTotal = ;
+
     // var player1 = new Player(player1name);
     // var player2 = new Player(player2name);
-    // $(".switch").empty();
     $(".dice").empty();
     changeTurns.forEach(function() {
       $(".dice").append("<h3>" + changeTurns + "</h3>")
     });
     $(".dice").append(diceRoll);
     $("#rollResult").text(roll);
+
+// console.log(roll);
+// console.log(player1.turnTotal());
+// console.log(player2.turnTotal());
   });
 });
