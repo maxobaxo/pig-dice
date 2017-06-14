@@ -3,28 +3,66 @@ function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
-}
+};
+
+function dieFace(roll) {
+  if (roll === 1) {
+    return "<img src='img/die_face_1.png'>";
+  } else if (roll === 2) {
+    return "<img src='img/die_face_2.png'>";
+  } else if (roll === 3) {
+    return "<img src='img/die_face_3.png'>";
+  } else if (roll === 4) {
+    return "<img src='img/die_face_4.png'>";
+  } else if (roll === 5) {
+    return "<img src='img/die_face_5.png'>";
+  } else if (roll === 6) {
+    return "<img src='img/die_face_6.png'>";
+  }
+};
+// function Player(playerName) {
+//   this.playerName = playerName;
+// };
+//
+// Player.prototype.rollOutcome() = function() {
+//   return roll;
+// };
+//
+// Player.prototype.turnTotal() = function() {
+//   if (roll !== 1 ) {
+//     turnTotal += roll;
+//     return turnTotal;
+//   } else {
+//     turnTotal = 0;
+//   }
+// };
+// Player.prototype.grandTotal() = function() {
+// };
 
 //party logic in the back
 $(document).ready(function() {
   $("#inputFields").submit(function(event) {
     event.preventDefault();
 
-    var player1 = $("input#playerOne").val();
-    var player2 = $("input#playerTwo").val();
+    var player1name = $("input#playerOne").val();
+    var player2name = $("input#playerTwo").val();
 
     $("#nameInput").hide();
+    $(".playerOne").text(player1name);
+    $(".playerTwo").text(player2name);
     $("#gameBoard").show();
   });
 
 
   $(".dice").click(function(event) {
     event.preventDefault();
-
-
     var roll = getRandomIntInclusive(1, 6);
-console.log(roll);
-    $(".dice").hide();
+    var diceRoll = dieFace(roll);
+    // var turnTotal = ;
+    // var player1 = new Player(player1name);
+    // var player2 = new Player(player2name);
+    $(".dice").empty();
+    $(".dice").after(diceRoll);
     $("#rollResult").text(roll);
   });
 });
