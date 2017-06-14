@@ -1,3 +1,10 @@
 #gameBoard {
   display: none;
 }
+
+.dice {
+  width: 50%;
+  display: block;
+  margin: auto;
+  /*text-align: center;*/
+}
