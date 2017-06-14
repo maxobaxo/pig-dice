@@ -1,8 +1,8 @@
 //business logic in the front
-function rollDice(min, max) {
+function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 //party logic in the back
@@ -21,10 +21,10 @@ $(document).ready(function() {
   $(".dice").click(function(event) {
     event.preventDefault();
 
-    var min = 1;
-    var max = 7;
-    var roll = rollDice(min, max);
+
+    var roll = getRandomIntInclusive(1, 6);
+console.log(roll);
     $(".dice").hide();
-    $("#rollBox").text(roll);
+    $("#rollResult").text(roll);
   });
 });
