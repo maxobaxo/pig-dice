@@ -22,13 +22,14 @@ function dieFace(roll) {
 };
 
 function switchTurns(roll) {
+  var turnOver = [];  
   if (roll === 1) {
-    var turnOver = "YOUR TURN IS OVER!"
-    return turnOver;
+    turnOver.push("YOUR TURN IS OVER!");
   } else {
-    return "";
+    turnOver.push("");
   }
-}
+  return turnOver;
+};
 
 // function Player(playerName) {
 //   this.playerName = playerName;
@@ -69,15 +70,15 @@ $(document).ready(function() {
     var roll = getRandomIntInclusive(1, 6);
     var diceRoll = dieFace(roll);
     var changeTurns = switchTurns(roll);
-
-    console.log(changeTurns);
     // var turnTotal = ;
     // var player1 = new Player(player1name);
     // var player2 = new Player(player2name);
     // $(".switch").empty();
     $(".dice").empty();
+    changeTurns.forEach(function() {
+      $(".dice").append("<h3>" + changeTurns + "</h3>")
+    });
     $(".dice").append(diceRoll);
-    $(".dice").append("<h4>" + changeTurns + "</h4>");
     $("#rollResult").text(roll);
   });
 });
