@@ -24,30 +24,68 @@
           </form>
         </div>
       </div>
-      <div class="row" id="instructions">
-        <div class="col-md-12">
-          <h2>Instructions:</h2>
-          <ol>
-            <li><span class="player1name"></span> clicks the die to roll first.</li>
-            <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
-            <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
-            <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
-            <li>The first player to score 100 or more points wins at life! The other player is executed.</li>
-          </ol>
+      <div id="gameBoard">
+        <div class="row" id="instructions">
+          <div class="col-md-12 well">
+            <h2>Instructions:</h2>
+            <ol>
+              <li><span class="player1name"></span> Clicks the die to roll first.</li>
+              <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
+              <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
+              <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
+              <li>The first player to score 100 or more points wins at life! The other player is executed.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-4 well" id="p1-dugout">
+            <h2><span class="playerOne"></span></h2>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3>Score</h3>
+              </div>
+              <div class="panel-body">
+                <div id="playerOneScore">
+                  <ul id="playerOneTally">
+                    <!-- add line items -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4 well" id="playing-field">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <!-- image goes here -->
+              </div>
+              <div class="panel-body">
+                <h3>You rolled a: </h3>
+                <h3>Click die to roll again or <button type="submit" id="holdButton">Hold</button></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 well" id="p2-dugout">
+            <h2><span class="playerTwo"></span></h2>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3>Score</h3>
+              </div>
+              <div class="panel-body">
+                <div id="playerTwoScore">
+                  <ul id="playerTwoTally">
+                    <!-- add line items -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4 well" id="p1-dugout">
-          
-        </div>
-        <div class="col-md-4 well" id="playing-field">
-
-        </div>
-        <div class="col-md-4 well" id="p2-dugout">
-
-        </div>
-      </div>
-
     </div>
   </body>
 </html>

@@ -9,7 +9,7 @@ $(document).ready(function() {
     var player2 = $("input#playerTwo").val();
 
     $("#nameInput").hide();
-
+    $("#gameBoard").show();
 
   });
 });
