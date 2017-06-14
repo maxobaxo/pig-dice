@@ -62,7 +62,7 @@ $(document).ready(function() {
     // var player1 = new Player(player1name);
     // var player2 = new Player(player2name);
     $(".dice").empty();
-    $(".dice").after(diceRoll);
+    $(".dice").append(diceRoll);
     $("#rollResult").text(roll);
   });
 });
