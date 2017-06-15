@@ -21,20 +21,22 @@ function getRandomIntInclusive(min, max) {
 //   }
 // };
 
-function switchTurns(roll) {
-  var turnOver = [];
-  if (roll === 1) {
-    turnOver.push("YOUR TURN IS OVER!");
-  } else {
-    turnOver.push("");
-  }
-  return turnOver;
-};
+// function switchTurns(roll) {
+//   var turnOver = [];
+//   if (roll === 1) {
+//     turnOver.push("YOUR TURN IS OVER!");
+//   } else {
+//     turnOver.push("");
+//   }
+//   return turnOver;
+// };
 
 function Player(playerName) {
   this.playerName = playerName;
   this.rollOutcome;
   this.dieFace;
+  this.turnTotal = 0;
+  this.grandTotal = 0;
 };
 
 Player.prototype.roll = function() {
@@ -59,13 +61,21 @@ Player.prototype.die = function() {
   return this.dieFace;
 };
 
-Player.prototype.turnTotal = function(roll) {
-  var turnTotal = 0;
-    if (roll !== 1) {
-      turnTotal += roll;
-  }
-  return turnTotal;
+Player.prototype.addToTurn = function() {
+  // if (this.rollOutcome !== 1) {
+    this.turnTotal += this.rollOutcome;
+  // }
+  return this.turnTotal;
 };
+
+
+// Player.prototype.turnTotalCalc = function() {
+//   // this.turnTotal = 0;
+//   if (this.rollOutcome !== 1) {
+//     this.turnTotal += this.rollOutcome;
+//   }
+//   return this.turnTotal;
+// };
 
 Player.prototype.grandTotal = function() {
 };
@@ -99,15 +109,16 @@ $(document).ready(function() {
 
     // diceRoll = dieFace(player1.rollOutcome);
     player1roll = player1.roll();
-    changeTurns = switchTurns(player1roll);
+    // changeTurns = switchTurns(player1roll);
 
     $(".dice").empty();
-    changeTurns.forEach(function() {
-      $(".dice").append("<h3>" + changeTurns + "</h3>")
-    });
+    // changeTurns.forEach(function() {
+    //   $(".dice").append("<h3>" + changeTurns + "</h3>")
+    // });
     $(".dice").append(player1.die());
     $("#rollResult").text(player1roll);
-    console.log(player1.die());
+    $("playerOneTally").append(player1.addToTurn());
     console.log(player1roll);
+    console.log(player1.turnTotal);
   });
 });
