@@ -11,3 +11,15 @@ img {
 .switch {
   display: none;
 }
+
+#button-show1 {
+  display: none;
+}
+
+#button-show2 {
+  display: none;
+}
+
+.die2 {
+  display: none;
+}

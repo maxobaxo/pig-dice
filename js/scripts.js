@@ -5,32 +5,6 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-// function dieFace(roll) {
-//   if (roll === 1) {
-//     return "<img src='img/die_face_1.png'>";
-//   } else if (roll === 2) {
-//     return "<img src='img/die_face_2.png'>";
-//   } else if (roll === 3) {
-//     return "<img src='img/die_face_3.png'>";
-//   } else if (roll === 4) {
-//     return "<img src='img/die_face_4.png'>";
-//   } else if (roll === 5) {
-//     return "<img src='img/die_face_5.png'>";
-//   } else if (roll === 6) {
-//     return "<img src='img/die_face_6.png'>";
-//   }
-// };
-
-// function switchTurns(roll) {
-//   var turnOver = [];
-//   if (roll === 1) {
-//     turnOver.push("YOUR TURN IS OVER!");
-//   } else {
-//     turnOver.push("");
-//   }
-//   return turnOver;
-// };
-
 function Player(playerName) {
   this.playerName = playerName;
   this.rollOutcome;
@@ -62,16 +36,19 @@ Player.prototype.die = function() {
 };
 
 Player.prototype.addToTurn = function() {
-  // if (this.rollOutcome !== 1) {
+  if (this.rollOutcome !== 1) {
     this.turnTotal += this.rollOutcome;
-  // }
+  } else {
+    var turnOver = [];
+    this.turnTotal = 0;
+  }
   return this.turnTotal;
 };
 
-Player.prototype.addToGrand = function() {
-  this.grandTotal += this.turnTotal;
-  return this.grandTotal;
-};
+// Player.prototype.addToGrand = function() {
+//   this.grandTotal += this.turnTotal;
+//   return this.grandTotal;
+// };
 
 //party logic in the back
 $(document).ready(function() {
@@ -96,31 +73,31 @@ $(document).ready(function() {
     $("#gameBoard").show();
   });
 
-
-  $(".dice").click(function(event) {
+  $(".die1").click(function(event) {
     event.preventDefault();
 
-    // diceRoll = dieFace(player1.rollOutcome);
     player1roll = player1.roll();
-    // changeTurns = switchTurns(player1roll);
 
-    $(".dice").empty();
-    // changeTurns.forEach(function() {
-    //   $(".dice").append("<h3>" + changeTurns + "</h3>")
-    // });
-    $(".dice").append(player1.die());
-    $("#rollResult").text(player1roll);
+    $(".die1").empty();
+    $(".die1").append(player1.die());
+    $(".die1").append("<h3>" + "You rolled a: " + "<span class='rollResult'></span></h3>");
+    $(".rollResult").text(player1roll);
     $("#p1-turnTotal").empty();
     $("#p1-turnTotal").append("<h4>Turn Total: " + player1.addToTurn() + "</h4>");
-    console.log(player1roll);
-    console.log(player1.turnTotal);
+    $("#button-show1").show();
+    if (player1roll === 1) {
+      $("#button-show1").hide();
+      $(".die1").hide();
+      $(".die2").append("<h4>" + "YOUR TURN IS OVER, PIG!" + "</h4>" + "<h5>Next player roll.</h5>");
+       $(".die2").show();
+    }
   });
 
-  $("#holdButton").click(function(event) {
-    event.preventDefault();
-
-    $("#p1-grandTotal").empty();
-    $("#p1-grandTotal").append("<h4>Grand Total: " + player1.addToGrand() + "</h4>");
-  });
+  // $("#p1-holdButton").click(function(event) {
+  //   event.preventDefault();
+  //
+  //   $("#p1-grandTotal").empty();
+  //   $("#p1-grandTotal").append("<h4>Grand Total: " + player1.addToGrand() + "</h4>");
+  // });
 
 });
