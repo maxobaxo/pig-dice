@@ -45,13 +45,13 @@ Player.prototype.addToTurn = function() {
 };
 
 Player.prototype.addToGrand = function() {
-  this.grandTotal += this.turnTotal;
-  var winnerArray = []
-  if (this.grandTotal >= 100) {
+  winnerArray = [];
+  if (this.grandTotal < 20) {
+    this.grandTotal += this.turnTotal;
+    return this.grandTotal;
+  } else {
     winnerArray.push("You win! You're the Big Pig!");
     return winnerArray;
-  } else {
-    return this.grandTotal;
   }
 };
 
@@ -68,7 +68,6 @@ $(document).ready(function() {
 
     player1name = $("input#playerOne").val();
     player2name = $("input#playerTwo").val();
-
     player1 = new Player(player1name);
     player2 = new Player(player2name);
 
@@ -76,9 +75,6 @@ $(document).ready(function() {
     $(".playerOne").text(player1name);
     $(".playerTwo").text(player2name);
     $("#gameBoard").show();
-    winnerArray.forEach(function(i) {
-      $(".victory").append("<h2>" + winnerArray[i] + "</h2>")
-    })
   });
 
   $(".die1").click(function(event) {
@@ -106,18 +102,17 @@ $(document).ready(function() {
 
     $("#p1-grandTotal").empty();
     $("#p1-grandTotal").append("<h4>Grand Total: " + player1.addToGrand() + "</h4>");
+    // console.log(player1.addToGrand())
     player1.turnTotal = 0;
-    $("#p1-turnTotal").empty()
-    $("#p1-turnTotal").append("<h4>Turn Total: " + player1.turnTotal + "</h4>")
+    $("#p1-turnTotal").empty();
+    $("#p1-turnTotal").append("<h4>Turn Total: " + player1.turnTotal + "</h4>");
     $("#button-show1").hide();
 
     $(".die1").hide();
     $(".die2").empty();
-    $(".die2").append("<img id='start-die' src='img/question-die.jpg' alt='picture of die'>")
+    $(".die2").append("<img id='start-die' src='img/question-die.jpg' alt='picture of die'>");
     $(".die2").append("<h4>" + "Good Call." + "</h4>" + "<h5>Next player roll.</h5>");
     $(".die2").show();
-console.log(player1.turnTotal);
-console.log(player1.grandTotal);
   });
 
   $(".die2").click(function(event) {
@@ -136,7 +131,7 @@ console.log(player1.grandTotal);
       $("#button-show2").hide();
       $(".die2").hide();
       $(".die1").append("<h4>" + "YOUR TURN IS OVER, SOW!" + "</h4>" + "<h5>Next player roll.</h5>");
-       $(".die1").show();
+      $(".die1").show();
     }
   });
 
@@ -147,14 +142,13 @@ console.log(player1.grandTotal);
     $("#p2-grandTotal").append("<h4>Grand Total: " + player2.addToGrand() + "</h4>");
     player2.turnTotal = 0;
     $("#p2-turnTotal").empty();
-    $("#p2-turnTotal").append("<h4>Turn Total: " + player2.turnTotal + "</h4>")
+    $("#p2-turnTotal").append("<h4>Turn Total: " + player2.turnTotal + "</h4>");
     $("#button-show2").hide();
-
 
     $(".die2").hide();
     $(".die1").empty();
-    $(".die1").append("<img id='start-die' src='img/question-die.jpg' alt='picture of die'>")
+    $(".die1").append("<img id='start-die' src='img/question-die.jpg' alt='picture of die'>");
     $(".die1").append("<h4>" + "Good Call." + "</h4>" + "<h5>Next player roll.</h5>");
-     $(".die1").show();
+    $(".die1").show();
   });
 });
