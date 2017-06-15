@@ -68,16 +68,9 @@ Player.prototype.addToTurn = function() {
   return this.turnTotal;
 };
 
-
-// Player.prototype.turnTotalCalc = function() {
-//   // this.turnTotal = 0;
-//   if (this.rollOutcome !== 1) {
-//     this.turnTotal += this.rollOutcome;
-//   }
-//   return this.turnTotal;
-// };
-
-Player.prototype.grandTotal = function() {
+Player.prototype.addToGrand = function() {
+  this.grandTotal += this.turnTotal;
+  return this.grandTotal;
 };
 
 //party logic in the back
@@ -117,8 +110,17 @@ $(document).ready(function() {
     // });
     $(".dice").append(player1.die());
     $("#rollResult").text(player1roll);
-    $("playerOneTally").append(player1.addToTurn());
+    $("#p1-turnTotal").empty();
+    $("#p1-turnTotal").append("<h4>Turn Total: " + player1.addToTurn() + "</h4>");
     console.log(player1roll);
     console.log(player1.turnTotal);
   });
+
+  $("#holdButton").click(function(event) {
+    event.preventDefault();
+
+    $("#p1-grandTotal").empty();
+    $("#p1-grandTotal").append("<h4>Grand Total: " + player1.addToGrand() + "</h4>");
+  });
+
 });
