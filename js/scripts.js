@@ -5,21 +5,21 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-function dieFace(roll) {
-  if (roll === 1) {
-    return "<img src='img/die_face_1.png'>";
-  } else if (roll === 2) {
-    return "<img src='img/die_face_2.png'>";
-  } else if (roll === 3) {
-    return "<img src='img/die_face_3.png'>";
-  } else if (roll === 4) {
-    return "<img src='img/die_face_4.png'>";
-  } else if (roll === 5) {
-    return "<img src='img/die_face_5.png'>";
-  } else if (roll === 6) {
-    return "<img src='img/die_face_6.png'>";
-  }
-};
+// function dieFace(roll) {
+//   if (roll === 1) {
+//     return "<img src='img/die_face_1.png'>";
+//   } else if (roll === 2) {
+//     return "<img src='img/die_face_2.png'>";
+//   } else if (roll === 3) {
+//     return "<img src='img/die_face_3.png'>";
+//   } else if (roll === 4) {
+//     return "<img src='img/die_face_4.png'>";
+//   } else if (roll === 5) {
+//     return "<img src='img/die_face_5.png'>";
+//   } else if (roll === 6) {
+//     return "<img src='img/die_face_6.png'>";
+//   }
+// };
 
 function switchTurns(roll) {
   var turnOver = [];
@@ -31,33 +31,61 @@ function switchTurns(roll) {
   return turnOver;
 };
 
-// function Player(playerName) {
-//   this.playerName = playerName;
-// };
-//
-// Player.prototype.rollOutcome = function() {
-//   return roll;
-// };
-//
-// Player.prototype.turnTotal = function(roll) {
-//   var turnTotal = 0;
-//   while (roll !== 1) {
-//     turnTotal += roll;
-//     return turnTotal;
-//   }
-// };
-// Player.prototype.grandTotal = function() {
-// };
+function Player(playerName) {
+  this.playerName = playerName;
+  this.rollOutcome;
+  this.dieFace;
+};
+
+Player.prototype.roll = function() {
+  this.rollOutcome = getRandomIntInclusive(1, 6);
+  return this.rollOutcome;
+};
+
+Player.prototype.die = function() {
+  if (this.rollOutcome === 1) {
+    this.dieFace = "<img src='img/die_face_1.png'>";
+  } else if (this.rollOutcome === 2) {
+    this.dieFace = "<img src='img/die_face_2.png'>";
+  } else if (this.rollOutcome === 3) {
+    this.dieFace = "<img src='img/die_face_3.png'>";
+  } else if (this.rollOutcome === 4) {
+    this.dieFace = "<img src='img/die_face_4.png'>";
+  } else if (this.rollOutcome === 5) {
+    this.dieFace = "<img src='img/die_face_5.png'>";
+  } else if (this.rollOutcome === 6) {
+    this.dieFace = "<img src='img/die_face_6.png'>";
+  }
+  return this.dieFace;
+};
+
+Player.prototype.turnTotal = function(roll) {
+  var turnTotal = 0;
+    if (roll !== 1) {
+      turnTotal += roll;
+  }
+  return turnTotal;
+};
+
+Player.prototype.grandTotal = function() {
+};
 
 //party logic in the back
 $(document).ready(function() {
   var player1name;
   var player2name;
+  var player1;
+  var player2;
+  var changeTurns;
+
   $("#inputFields").submit(function(event) {
     event.preventDefault();
 
     player1name = $("input#playerOne").val();
     player2name = $("input#playerTwo").val();
+
+    player1 = new Player(player1name);
+    // player2 = new Player(player2name);
 
     $("#nameInput").hide();
     $(".playerOne").text(player1name);
@@ -68,21 +96,18 @@ $(document).ready(function() {
 
   $(".dice").click(function(event) {
     event.preventDefault();
-    var roll = getRandomIntInclusive(1, 6);
-    var diceRoll = dieFace(roll);
-    var changeTurns = switchTurns(roll);
 
-    // var player1 = new Player(player1name);
-    // var player2 = new Player(player2name);
+    // diceRoll = dieFace(player1.rollOutcome);
+    player1roll = player1.roll();
+    changeTurns = switchTurns(player1roll);
+
     $(".dice").empty();
     changeTurns.forEach(function() {
       $(".dice").append("<h3>" + changeTurns + "</h3>")
     });
-    $(".dice").append(diceRoll);
-    $("#rollResult").text(roll);
-
-// console.log(roll);
-// console.log(player1.turnTotal());
-// console.log(player2.turnTotal());
+    $(".dice").append(player1.die());
+    $("#rollResult").text(player1roll);
+    console.log(player1.die());
+    console.log(player1roll);
   });
 });
