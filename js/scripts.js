@@ -1,4 +1,4 @@
-//business logic in the front
+//business logic
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -46,8 +46,8 @@ Player.prototype.addToTurn = function() {
 
 Player.prototype.addToGrand = function() {
   winnerArray = [];
+  this.grandTotal += this.turnTotal;
   if (this.grandTotal < 20) {
-    this.grandTotal += this.turnTotal;
     return this.grandTotal;
   } else {
     winnerArray.push("You win! You're the Big Pig!");
@@ -55,7 +55,7 @@ Player.prototype.addToGrand = function() {
   }
 };
 
-//party logic in the back
+//party logic
 $(document).ready(function() {
   var player1name;
   var player2name;
@@ -102,7 +102,9 @@ $(document).ready(function() {
 
     $("#p1-grandTotal").empty();
     $("#p1-grandTotal").append("<h4>Grand Total: " + player1.addToGrand() + "</h4>");
-    // console.log(player1.addToGrand())
+    if (player1.grandTotal >= 20) {
+      $("#playing-field").hide();
+    }
     player1.turnTotal = 0;
     $("#p1-turnTotal").empty();
     $("#p1-turnTotal").append("<h4>Turn Total: " + player1.turnTotal + "</h4>");
@@ -140,6 +142,9 @@ $(document).ready(function() {
 
     $("#p2-grandTotal").empty();
     $("#p2-grandTotal").append("<h4>Grand Total: " + player2.addToGrand() + "</h4>");
+    if (player2.grandTotal >= 20) {
+      $("#playing-field").hide();
+    }
     player2.turnTotal = 0;
     $("#p2-turnTotal").empty();
     $("#p2-turnTotal").append("<h4>Turn Total: " + player2.turnTotal + "</h4>");
