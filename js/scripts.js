@@ -56,7 +56,7 @@ Player.prototype.addToGrand = function() {
   }
 };
 
-//party logic
+//user interface logic
 $(document).ready(function() {
   var player1name;
   var player2name;
@@ -82,11 +82,8 @@ $(document).ready(function() {
     event.preventDefault();
 
     player1roll = player1.roll();
-
     $(".die1").empty();
     $(".die1").append(player1.die());
-    console.log(player1.dieFace);
-    console.log(player1.die());
     $(".die1").append("<h3>" + "You rolled a: " + "<span class='rollResult'></span></h3>");
     $(".rollResult").text(player1roll);
     $("#p1-turnTotal").empty();
@@ -95,7 +92,9 @@ $(document).ready(function() {
     if (player1roll === 1) {
       $("#button-show1").hide();
       $(".die1").hide();
-      $(".die2").append("<h4>" + "YOUR TURN IS OVER, PIG!" + "</h4>" + "<h5>Next player roll.</h5>");
+      $(".die2").empty();
+      $(".die2").append("<img src='img/die_face_1.png' alt='picture of die'>" +
+      "<h4>" + "YOUR TURN IS OVER, PIG!" + "</h4>" + "<h5>Next player roll.</h5>");
        $(".die2").show();
     }
   });
@@ -137,7 +136,9 @@ $(document).ready(function() {
     if (player2roll === 1) {
       $("#button-show2").hide();
       $(".die2").hide();
-      $(".die1").append("<h4>" + "YOUR TURN IS OVER, SOW!" + "</h4>" + "<h5>Next player roll.</h5>");
+      $(".die1").empty();
+      $(".die1").append("<img src='img/die_face_1.png' alt='picture of die'>" +
+      "<h4>" + "YOUR TURN IS OVER, SOW!" + "</h4>" + "<h5>Next player roll.</h5>");
       $(".die1").show();
     }
   });
