@@ -21,6 +21,7 @@ Player.prototype.roll = function() {
 Player.prototype.die = function() {
   if (this.rollOutcome === 1) {
     this.dieFace = "<img src='img/die_face_1.png'>";
+    console.log("this.dieFace in the .die method = " + this.dieFace);
   } else if (this.rollOutcome === 2) {
     this.dieFace = "<img src='img/die_face_2.png'>";
   } else if (this.rollOutcome === 3) {
@@ -84,6 +85,8 @@ $(document).ready(function() {
 
     $(".die1").empty();
     $(".die1").append(player1.die());
+    console.log(player1.dieFace);
+    console.log(player1.die());
     $(".die1").append("<h3>" + "You rolled a: " + "<span class='rollResult'></span></h3>");
     $(".rollResult").text(player1roll);
     $("#p1-turnTotal").empty();
@@ -104,6 +107,8 @@ $(document).ready(function() {
     $("#p1-grandTotal").append("<h4>Grand Total: " + player1.addToGrand() + "</h4>");
     if (player1.grandTotal >= 20) {
       $("#playing-field").hide();
+      $("#winning-player").text(player1.playerName);
+      $("#victory").show();
     }
     player1.turnTotal = 0;
     $("#p1-turnTotal").empty();
@@ -144,6 +149,8 @@ $(document).ready(function() {
     $("#p2-grandTotal").append("<h4>Grand Total: " + player2.addToGrand() + "</h4>");
     if (player2.grandTotal >= 20) {
       $("#playing-field").hide();
+      $("#winning-player").text(player2.playerName);
+      $("#victory").show();
     }
     player2.turnTotal = 0;
     $("#p2-turnTotal").empty();
